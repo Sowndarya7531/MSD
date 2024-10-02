@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelVille - Your Ultimate Travel Booking Experience</title>
+    <link rel="stylesheet" href="home_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar-fixed">
+        <nav class="teal">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="home.html" class="brand-logo">TravelVille</a>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="./travel.html">Search</a></li>
+                        <li><a href="popular.html">Popular Places</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Search</a></li>
+        <li><a href="popular.html">Popular Places</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <!-- Section: Slider -->
+    <section id="home" class="slider">
+        <ul class="slides">
+            <li>
+                <img src="https://wallpapers.com/images/high/rocky-beach-night-view-mw0hwnvj7001e43r.webp">
+                <div class="caption center-align">
+                    <h2>Unleash Your Wanderlust</h2>
+                    <h5 class="light grey-text text-lighten-3 hide-on-small-only">Book your dream vacation with TravelVille! Experience unique destinations, personalized itineraries, and exclusive deals tailored just for you.</h5>
+                    <a href="search.html" class="btn btn-large">Book Now</a>
+                </div>
+            </li>
+            <li>
+                <img src="https://www.treksandtrails.org/system/images/000/708/950/25b99b1300b381369667e7668e2858fe/x600gt/camping_4.jpeg?1720630267">
+                 <div class="caption center-align">
+                    <h2>Adventure Awaits You</h2>
+                    <h5 class="light grey-text text-lighten-3 hide-on-small-only">Embark on thrilling escapades with our expertly curated travel packages. From scenic hikes to cultural explorations, your adventure begins here!</h5>
+                    <a href="search.html" class="btn btn-large">Join the Adventure</a>
+                </div>
+            </li>
+            <li>
+                <img src="https://things2.do/blogs/wp-content/uploads/2024/09/young-couple-having-romantic-evening-with-candles-on-beach.jpg" alt="">
+                <div class="caption center-align">
+                    <h2>Romantic Getaways</h2>
+                    <h5 class="light grey-text text-lighten-3 hide-on-small-only">Create unforgettable moments in stunning romantic destinations with TravelVille. Let love lead the way to your perfect escape!</h5>
+                    <a href="search.html" class="btn btn-large">Plan Your Escape</a>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sliderElems = document.querySelectorAll('.slider');
+            var sliderInstances = M.Slider.init(sliderElems, {
+                indicators: true,
+                height: 500,
+                transition: 600,
+                interval: 3000
+            });
+
+            var sidenavElems = document.querySelectorAll('.sidenav');
+            var sidenavInstances = M.Sidenav.init(sidenavElems);
+        });
+    </script>
+</body>
+</html>
