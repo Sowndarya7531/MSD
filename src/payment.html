@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Booking</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            color: #2193b0;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        form {
+            display: grid;
+            gap: 20px;
+        }
+        .form-group {
+            display: grid;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #2193b0;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1c7a94;
+        }
+        .qr-code {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .qr-code img {
+            max-width: 200px;
+            margin-bottom: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .tab {
+            display: none;
+        }
+        .tab.active {
+            display: block;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .progress {
+            height: 100%;
+            background-color: #2193b0;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+        .tab-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wanderlust Travel Booking</h1>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <form id="bookingForm">
+            <div class="tab" id="personalInfo">
+                <h2>Personal Information</h2>
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+            </div>
+
+            <div class="tab" id="travelDetails">
+                <h2>Travel Details</h2>
+                <div class="form-group">
+                    <label for="departureCity">Departure City:</label>
+                    <input type="text" id="departureCity" name="departureCity" required>
+                </div>
+                <div class="form-group">
+                    <label for="destinationCity">Destination City:</label>
+                    <input type="text" id="destinationCity" name="destinationCity" required>
+                </div>
+                <div class="form-group">
+                    <label for="departureDate">Departure Date:</label>
+                    <input type="date" id="departureDate" name="departureDate" required>
+                </div>
+            </div>
+
+            <div class="tab" id="paymentInfo">
+                <h2>Payment Information</h2>
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method:</label>
+                    <select id="paymentMethod" name="paymentMethod" required>
+                        <option value="creditCard">Credit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="qrCode">QR Code</option>
+                    </select>
+                </div>
+                <div id="creditCardFields" class="hidden">
+                    <div class="form-group">
+                        <label for="ccNumber">Credit Card Number:</label>
+                        <input type="text" id="ccNumber" name="ccNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="ccExpiry">Expiration Date:</label>
+                        <input type="month" id="ccExpiry" name="ccExpiry">
+                    </div>
+                </div>
+                <div id="qrCodeSection" class="qr-code hidden">
+                    <p>Scan the QR code to complete payment:</p>
+                    <img id="qrCodeImage" src="C:\Users\subha\OneDrive\Desktop\QR.jpg" alt="QR Code for Payment">
+                </div>
+            </div>
+
+            <div class="tab-buttons">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let currentTab = 0;
+        const tabs = document.getElementsByClassName("tab");
+        const progress = document.getElementById("progress");
+
+        showTab(currentTab);
+
+        function showTab(n) {
+            tabs[n].style.display = "block";
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (tabs.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+            updateProgress(n);
+        }
+
+        function nextPrev(n) {
+            tabs[currentTab].style.display = "none";
+            currentTab = currentTab + n;
+            if (currentTab >= tabs.length) {
+                document.getElementById("bookingForm").submit();
+                return false;
+            }
+            showTab(currentTab);
+        }
+
+        function updateProgress(n) {
+            const percent = (n / (tabs.length - 1)) * 100;
+            progress.style.width = percent + "%";
+        }
+
+        const paymentMethod = document.getElementById('paymentMethod');
+        const creditCardFields = document.getElementById('creditCardFields');
+        const qrCodeSection = document.getElementById('qrCodeSection');
+
+        paymentMethod.addEventListener('change', function() {
+            if (this.value === 'creditCard') {
+                creditCardFields.classList.remove('hidden');
+                qrCodeSection.classList.add('hidden');
+            } else if (this.value === 'qrCode') {
+                creditCardFields.classList.add('hidden');
+                qrCodeSection.classList.remove('hidden');
+            } else {
+                creditCardFields.classList.add('hidden');
+                qrCodeSection.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Booking submitted successfully! Get ready for your adventure!');
+        });
+    </script>
+</body>
+</html>

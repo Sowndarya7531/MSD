@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelVille - Popular Places</title>
+    <link rel="stylesheet" href="home_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        /* Flex container for the card layout */
+        .place-cards-container {
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space out the cards */
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            max-width: 100%; /* Full width */
+            padding: 20px; /* Padding around the container */
+        }
+
+        .place-card {
+    flex: 1 1 18%; /* Keep the width as is */
+    margin: 10px; /* Space between cards */
+    position: relative; /* Positioning context for absolute elements */
+    overflow: hidden; /* Hide overflow for the card */
+    height: 500px; /* Set a fixed height for the card */
+}
+
+.card-image {
+    height: 300px; /* Set a fixed height for the image */
+    overflow: hidden;
+    position: relative; /* For positioning the text */
+}
+
+
+        .card-image img {
+            width: 100%; /* Make image fill the width */
+            height: 100%; /* Make image fill the height */
+            object-fit: cover; /* Ensure images are cropped to fit the card */
+            transition: transform 0.3s ease, filter 0.3s ease; /* Transition for blur */
+        }
+
+        .card-image:hover img {
+            filter: blur(4px); /* Blur the image on hover */
+            transform: scale(1.1); /* Scale the image slightly */
+        }
+
+        .card-content {
+            height: 100%; /* Full height for text */
+            position: absolute; /* Position text over the image */
+            bottom: 0; /* Align text to the bottom */
+            left: 0;
+            right: 0;
+            color: white; /* Text color */
+            text-align: center; /* Center the text */
+            transition: transform 0.3s ease; /* Transition for text scroll */
+            transform: translateY(100%); /* Hide text by default */
+        }
+
+        .card-image:hover .card-content {
+            transform: translateY(0); /* Slide text into view */
+        }
+
+        button {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for button */
+            color: white; /* Button text color */
+            border: none; /* No border */
+            padding: 10px 20px; /* Padding */
+            cursor: pointer; /* Pointer cursor */
+            transition: background-color 0.3s ease; /* Transition for button hover */
+        }
+
+        button:hover {
+            background-color: rgba(0, 0, 0, 0.7); /* Darker background on hover */
+        }
+
+        /* Change the hover text color */
+        .card-title {
+            color: rgb(246, 242, 10); /* Initial text color */
+        }
+
+        .place-card:hover .card-title {
+            color: rgb(243, 133, 15); /* Change text color on hover */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 800px) {
+            .place-card {
+                flex: 1 1 30%; /* 3 cards per row on smaller screens */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .place-card {
+                flex: 1 1 45%; /* 2 cards per row on small screens */
+            }
+        }
+
+        @media (max-width: 400px) {
+            .place-card {
+                flex: 1 1 100%; /* 1 card per row on very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar-fixed"></div>
+        <nav class="teal">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="index.html" class="brand-logo">TravelVille</a>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="search.html">Search</a></li>
+                        <li><a href="popular.html">Popular Places</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Section: Popular Places -->
+    <section id="popular" class="section section-popular scrollspy">
+        <div class="place-cards-container">
+            <h4 class="center" style="width: 100%;"><span class="teal-text">Explore</span> Popular Places</h4>
+
+            <!-- Top 5 Places in one line -->
+            <div class="place-card">
+                <div class="card-image">
+                    <img src="https://image.ibb.co/hbEMux/resort1.jpg" alt="Cancun, Mexico">
+                    <span class="card-title">Cancun, Mexico</span>
+                    <div class="card-content">
+                        <p>Experience the vibrant nightlife, stunning beaches, and rich culture of Cancun, where adventure meets relaxation.</p>
+                        <button><a href="./payment.html"> Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="place-card">
+                <div class="card-image">
+                    <img src="https://image.ibb.co/mn1egc/resort2.jpg" alt="The Bahamas">
+                    <span class="card-title">The Bahamas</span>
+                    <div class="card-content">
+                        <p>Relax in paradise with crystal-clear waters, white sandy beaches, and luxurious resorts in the beautiful Bahamas.</p>
+                        <button><a href="./payment.html"> Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="place-card">
+                <div class="card-image">
+                    <img src="https://image.ibb.co/mbCVnH/resort3.jpg" alt="Nova Scotia">
+                    <span class="card-title">Nova Scotia</span>
+                    <div class="card-content">
+                        <p>Discover the breathtaking landscapes and charming coastal towns of Nova Scotia, a hidden gem of the East.</p>
+                        <button><a href="./payment.html"> Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="place-card">
+                <div class="card-image">
+                    <img src="https://wallpaperaccess.com/full/5923621.jpg" alt="Bali, Indonesia">
+                    <span class="card-title">Bali, Indonesia</span>
+                    <div class="card-content">
+                        <p>Immerse yourself in Bali’s stunning beaches, rich culture, and serene temples for an unforgettable vacation.</p>
+                        <button><a href="./payment.html"> Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="place-card">
+                <div class="card-image">
+                    <img src="https://luxury-tours.in/wp-content/uploads/2023/09/Grace-Hotel-Santorini.webp" alt="Santorini, Greece">
+                    <span class="card-title">Santorini, Greece</span>
+                    <div class="card-content">
+                        <p>Marvel at the breathtaking sunsets and charming white-washed buildings of Santorini, the jewel of the Aegean Sea.</p>
+                        <button><a href="./payment.html"> Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        // JavaScript to add click event for a transition effect
+        document.querySelectorAll('.place-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.querySelector('img').classList.add('clicked');
+                setTimeout(() => {
+                    card.querySelector('img').classList.remove('clicked');
+                }, 300); // Duration for clicked transition
+            });
+        });
+    </script>
+</body>
+</html>

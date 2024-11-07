@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar and Cards Layout</title>
+  <style>
+    /* General styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #333;
+      padding: 1em;
+    }
+
+    .navbar ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .navbar ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Card Section */
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .card-text {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .card-text h3 {
+      margin: 10px 0;
+    }
+
+    .card-text p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .card {
+        width: 45%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Card Section -->
+  <section class="card-container">
+    <div class="card">
+      <div class="card-image">
+        <img src="https://fps.cdnpk.net/images/home/subhome-ai.webp?w=649&h=649" alt="Card Image 1">
+      </div>
+      <div class="card-text">
+        <h3>Card Title 1</h3>
+        <p>Some description about the first card.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <img src="image2.jpg" alt="Card Image 2">
+      </div>
+      <div class="card-text">
+        <h3>Card Title 2</h3>
+        <p>Some description about the second card.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <img src="image3.jpg" alt="Card Image 3">
+      </div>
+      <div class="card-text">
+        <h3>Card Title 3</h3>
+        <p>Some description about the third card.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <img src="image4.jpg" alt="Card Image 4">
+      </div>
+      <div class="card-text">
+        <h3>Card Title 4</h3>
+        <p>Some description about the fourth card.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <img src="image5.jpg" alt="Card Image 5">
+      </div>
+      <div class="card-text">
+        <h3>Card Title 5</h3>
+        <p>Some description about the fifth card.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <img src="image6.jpg" alt="Card Image 6">
+      </div>
+      <div class="card-text">
+        <h3>Card Title 6</h3>
+        <p>Some description about the sixth card.</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start the Journey</title>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+    <!-- Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.css" />
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Materialize CSS for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./travel.css">
+</head>
+<body>
+    <header>
+        <div class="navbar-fixed">
+            <nav class="custom-navbar"> <!-- Add a custom class here -->
+                <div class="container">
+                    <div class="nav-wrapper">
+                        <a href="./home.html" class="brand-logo">TravelVille</a>
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="./home.html">Home</a></li>
+                            <li><a href="./travel.html">BookNow</a></li>
+                            <li><a href="#popular">About Us</a></li>
+                            <li><a href="#gallery">Gallery</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- Background Overlay -->
+    <div class="background-overlay"></div>
+
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <header class="text-center mb-12">
+            <h1 class="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">Let's Start the Journey</h1>
+            <p class="text-2xl text-gray-600">Discover the best route and travel options for your adventure</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Details Entering Card -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 transition duration-300 ease-in-out card-hover">
+                <h2 class="text-3xl font-bold mb-8 text-gray-800">Trip Details</h2>
+                
+                <!-- Trip Type Selection -->
+                <div class="mb-8">
+                    <span class="block text-lg font-medium text-gray-700 mb-3">Trip Type</span>
+                    <div class="flex flex-wrap gap-6">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="tripType" value="one-way" class="form-radio text-purple-600 h-5 w-5" checked onchange="toggleTripType()">
+                            <span class="ml-3 text-lg">One-Way Trip</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="tripType" value="round-trip" class="form-radio text-purple-600 h-5 w-5" onchange="toggleTripType()">
+                            <span class="ml-3 text-lg">Round Trip</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="tripType" value="multi-city" class="form-radio text-purple-600 h-5 w-5" onchange="toggleTripType()">
+                            <span class="ml-3 text-lg">Multi-City Trip</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Trip Details Container -->
+                <div id="trip-details" class="space-y-8">
+                    <!-- Source Location -->
+                    <div>
+                        <label for="source" class="block text-lg font-medium text-gray-700 mb-2">Source Location</label>
+                        <input type="text" id="source" 
+                               class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
+                               placeholder="Enter starting point">
+                    </div>
+
+                    <!-- Destination Locations -->
+                    <div id="destinations-container">
+                        <label class="block text-lg font-medium text-gray-700 mb-2">Destination</label>
+                        <div id="destination-fields" class="space-y-6">
+                            <div class="destination-segment relative">
+                                <input type="text" class="destination-input w-full px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
+                                       placeholder="Enter destination">
+                                <div class="mt-4">
+                                    <label class="block text-lg font-medium text-gray-700 mb-2">Date</label>
+                                    <input type="date" class="destination-date w-full px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg">
+                                </div>
+                                <button type="button" class="absolute top-0 right-0 mt-3 mr-3 bg-red-600 text-white rounded-full p-1 hover:bg-red-700 transition duration-200 hidden" onclick="removeDestinationField(this)">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <button id="add-destination-btn" type="button"
+                                class="mt-6 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-200 text-lg font-semibold flex items-center justify-center"
+                                onclick="addDestinationField()" style="display: none;">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            Add Destination
+                        </button>
+                    </div>
+
+                    <!-- Additional Date Fields -->
+                    <div id="additional-dates" class="space-y-6">
+                        <!-- This section will be dynamically populated based on trip type -->
+                    </div>
+
+                    <!-- Travel Mode Selection -->
+                    <div>
+                        <label class="block text-lg font-medium text-gray-700 mb-3">Travel Mode</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                            <label class="flex flex-col items-center justify-center p-6 border-2 border-gray-300 rounded-xl hover:bg-gray-50 cursor-pointer transition duration-200">
+                                <input type="radio" name="travelMode" value="car" class="sr-only" checked>
+                                <i class="fas fa-car travel-mode-icon mb-3 text-4xl text-purple-600"></i>
+                                <span class="text-lg font-medium">Car</span>
+                            </label>
+                            <label class="flex flex-col items-center justify-center p-6 border-2 border-gray-300 rounded-xl hover:bg-gray-50 cursor-pointer transition duration-200">
+                                <input type="radio" name="travelMode" value="plane" class="sr-only">
+                                <i class="fas fa-plane travel-mode-icon mb-3 text-4xl text-purple-600"></i>
+                                <span class="text-lg font-medium">Plane</span>
+                            </label>
+                            <label class="flex flex-col items-center justify-center p-6 border-2 border-gray-300 rounded-xl hover:bg-gray-50 cursor-pointer transition duration-200">
+                                <input type="radio" name="travelMode" value="bus" class="sr-only">
+                                <i class="fas fa-bus travel-mode-icon mb-3 text-4xl text-purple-600"></i>
+                                <span class="text-lg font-medium">Bus</span>
+                            </label>
+                            <label class="flex flex-col items-center justify-center p-6 border-2 border-gray-300 rounded-xl hover:bg-gray-50 cursor-pointer transition duration-200">
+                                <input type="radio" name="travelMode" value="train" class="sr-only">
+                                <i class="fas fa-train travel-mode-icon mb-3 text-4xl text-purple-600"></i>
+                                <span class="text-lg font-medium">Train</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find Route Button -->
+                <button onclick="displayRoute()" 
+                        class="w-full mt-10 gradient-bg text-white py-4 px-6 rounded-xl hover:opacity-90 transition duration-200 flex items-center justify-center text-xl font-bold">
+                    <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                    </svg>
+                    Find Route
+                </button>
+            </div>
+
+            <!-- Map -->
+            <div class="bg-white rounded-2xl shadow-xl p-4 transition duration-300 ease-in-out card-hover">
+                <div id="map" class="w-full rounded-xl"></div>
+            </div>
+        </div>
+
+        <!-- Route Details and Travel Options -->
+        <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <!-- Route Details Card -->
+            <div id="route-info" class="bg-white rounded-2xl shadow-xl p-8 hidden lg:col-span-1 transition duration-300 ease-in-out card-hover">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Route Details</h2>
+                <div id="route-details" class="space-y-4">
+                    <!-- Dynamic Route Details Will Be Injected Here -->
+                </div>
+                <div class="mt-6 space-y-4">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-purple-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <span class="text-xl text-gray-700"><strong>Distance:</strong> <span id="distance" class="font-medium">-</span></span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-purple-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m0 0l4-4m-4 4l-4-4"></path>
+                        </svg>
+                        <span class="text-xl text-gray-700"><strong>Estimated Time:</strong> <span id="estimated-time" class="font-medium">-</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Travel Options Card -->
+            <div id="travel-options" class="bg-white rounded-2xl shadow-xl p-8 hidden lg:col-span-2 transition duration-300 ease-in-out card-hover">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Travel Options</h2>
+                <ul id="options-list" class="space-y-6">
+                    <!-- Dynamic Travel Options Will Be Injected Here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script src="./travel.js"></script>
+</body>
+</html>
